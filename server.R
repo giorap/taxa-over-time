@@ -1,4 +1,4 @@
-source('upload-data.R')
+source('source-rds.R')
 ## Shiny app 
 shinyServer(
         function(input, output) {        
