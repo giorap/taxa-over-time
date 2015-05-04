@@ -1,5 +1,8 @@
+## Load Shiny
 library(shiny)
-
+## Source and process .rds objects to generate taxon_table object
+source('source-rds.R')
+## Shiny App User Interface
 shinyUI(fluidPage(
         title = 'Taxa over time',
         #  Application title

@@ -1,3 +1,4 @@
+## Source and process .rds objects to generate taxon_table object
 source('source-rds.R')
 ## Shiny app 
 shinyServer(
