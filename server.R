@@ -4,8 +4,7 @@ library(shiny)
 source('source-rds.R')
 ## Shiny app 
 shinyServer(
-        function(input, output) {        
-                
+        function(input, output) {                        
                 output$taxon_plot <- renderPlot({
                 # Subset taxon_table according to checklist and slider selection 
                 selection_subset <- subset(taxon_table, taxon == input$show_taxon &
