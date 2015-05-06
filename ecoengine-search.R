@@ -5,17 +5,29 @@ library(ecoengine)
 library(dplyr)
 ## Download Ecoegine records
 # Download all California amphibian records in Ecoengine
-cal_amphibians <- ee_observations(clss = 'amphibia', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_amphibians <- ee_observations(clss = 'amphibia', min_date = '1900-01-01', 
+                                  max_date = '2015-01-01', state_province = 'California', 
+                                  georeferenced = TRUE, page = "all")$data
 # Download all California bird records in Ecoengine
-cal_birds <- ee_observations(clss = 'aves', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_birds <- ee_observations(clss = 'aves', min_date = '1900-01-01', 
+                             max_date = '2015-01-01', state_province = 'California', 
+                             georeferenced = TRUE, page = "all")$data
 # Download all California insect records in Ecoengine
-cal_insects <- ee_observations(clss = 'insecta', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_insects <- ee_observations(clss = 'insecta', min_date = '1900-01-01', 
+                               max_date = '2015-01-01', state_province = 'California', 
+                               georeferenced = TRUE, page = "all")$data
 # Download all California mammal records in Ecoengine
-cal_mammals <- ee_observations(clss = 'mammalia', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_mammals <- ee_observations(clss = 'mammalia', min_date = '1900-01-01', 
+                               max_date = '2015-01-01', state_province = 'California', 
+                               georeferenced = TRUE, page = "all")$data
 # Download all California plant records in Ecoengine
-cal_plants <- ee_observations(kingdom = 'plantae', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_plants <- ee_observations(kingdom = 'plantae', min_date = '1900-01-01', 
+                              max_date = '2015-01-01', state_province = 'California', 
+                              georeferenced = TRUE, page = "all")$data
 # Download all California reptile records in Ecoengine
-cal_reptiles <- ee_observations(clss = 'reptilia', min_date = '1900-01-01 00:00:00', max_date = '2015-01-01 00:00:00', state_province = 'California', georeferenced = TRUE, page = "all")$data
+cal_reptiles <- ee_observations(clss = 'reptilia', min_date = '1900-01-01', 
+                                max_date = '2015-01-01', state_province = 'California', 
+                                georeferenced = TRUE, page = "all")$data
 ## Process data.frames
 # Add a taxon field
 cal_amphibians$taxon <- 'Amphibians'
@@ -33,5 +45,5 @@ taxon_table$year <- as.numeric(substr(taxon_table$begin_date, 1, 4))
 taxon_table <- taxon_table %>% filter(year >= 1900)
 # Keep useful columns only
 taxon_table <- taxon_table[c('taxon', 'year')]
-## Save serialized object
+## Save serialized object for input into Shiny app
 saveRDS(taxon_table, file = 'data/taxon_table.rds')
