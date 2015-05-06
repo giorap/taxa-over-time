@@ -1,15 +1,15 @@
 ## Load Shiny
 library(shiny)
-## Source and process .rds objects to generate taxon_table object
-source('source-rds.R')
+library(dplyr)
+## Read .rds object derived from ecoengine-search.R
+taxon_table <- readRDS('data/taxon_table.rds')
 ## Shiny app 
 shinyServer(
         function(input, output) {                        
                 output$taxon_plot <- renderPlot({
                 # Subset taxon_table according to checklist and slider selection 
-                selection_subset <- subset(taxon_table, taxon == input$show_taxon &
-                                             year >= input$range[1] &
-                                             year <= input$range[2])             
+                selection_subset <- taxon_table %>% 
+                filter(taxon == input$show_taxon & year >= input$range[1]  & year <= input$range[2])             
                 # Table up subset data 
                 selection_table <- table(selection_subset$taxon, selection_subset$year)
                 # Keep nonzero rows
